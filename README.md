@@ -7,7 +7,7 @@ Here you can use this script to download view only pdf file from Google Drive. T
 ### Instruction
 1. Open the PDF from Google Drive,
 2. Click Preview,
-3. Then on top right page click on three dots menu -> Open in new window,
+3. Then on top right page click on three vertical dots menu -> Open in new window,
 4. Scroll down pdf to end of content and make sure all of content is loaded,
 5. Inspect element your browser,
 6. Copy and paste script below on console tab,
@@ -42,10 +42,8 @@ Here you can use this script to download view only pdf file from Google Drive. T
        }
    
        console.log(`${validImgs.length} content found!`);
+       console.log("Generating PDF file ...");
        for (let i = 0; i < validImgs.length; i++) {
-         const percentages = Math.floor(((i + 1) / validImgs.length) * 100);
-         console.log(`Processing content ${percentages}%`);
-   
          let img = validImgs[i];
          let canvasElement = document.createElement("canvas");
          let con = canvasElement.getContext("2d");
@@ -83,6 +81,9 @@ Here you can use this script to download view only pdf file from Google Drive. T
              pdf.addPage();
            }
          }
+   
+         const percentages = Math.floor(((i + 1) / validImgs.length) * 100);
+         console.log(`Processing content ${percentages}%`);
        }
    
        // check if title contains .pdf in end of the title
