@@ -109,4 +109,4 @@ Here you can use this script to download view only pdf file from Google Drive. T
 ### Source Reference
 This script is modified with source from :
 - [mhsohan/How-to-download-protected-view-only-files-from-google-drive-](https://github.com/mhsohan/How-to-download-protected-view-only-files-from-google-drive-)
-- [zeltox/Google-Drive-PDF-Downloaderzeltox/Google-Drive-PDF-Downloader](https://github.com/zeltox/Google-Drive-PDF-Downloaderzeltox/Google-Drive-PDF-Downloader)
+- [zeltox/Google-Drive-PDF-Downloader](https://github.com/zeltox/Google-Drive-PDF-Downloaderzeltox/Google-Drive-PDF-Downloader)
