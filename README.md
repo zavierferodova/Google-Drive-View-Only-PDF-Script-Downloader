@@ -103,8 +103,9 @@ Here you can use this script to download view only pdf file from Google Drive. T
       document.body.appendChild(script);
     })();
    ```
-6. Wait script processing and downloading pdf file.
-7. Enjoyy....
+6. Wait script processing and downloading pdf file,
+7. Fast or slow pdf processing based on the pdf content it self,
+8. Enjoyy....
 
 ### Source Reference
 This script is modified with source from :
