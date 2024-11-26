@@ -87,7 +87,7 @@ Here you can use this script to download view only pdf file from Google Drive. T
        }
    
        // check if title contains .pdf in end of the title
-       const title = document.querySelector('meta[itemprop="name"]').content;
+       let title = document.querySelector('meta[itemprop="name"]').content;
        if (title.split(".").pop() !== "pdf") {
          title = title + ".pdf";
        }
