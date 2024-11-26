@@ -2,7 +2,7 @@
 
 Here you can use this script to download view only pdf file from Google Drive. This script works like a screenshot capturing all pdf pages to bulk of images with better resolution quality and combine it all into one pdf file.
 
-### Big-Note: Use this script wisely!
+### Big-Note: I love you!
 
 ### Instruction
 1. Open the PDF from Google Drive,
@@ -87,7 +87,7 @@ Here you can use this script to download view only pdf file from Google Drive. T
        }
    
        // check if title contains .pdf in end of the title
-       const title = document.querySelector('meta[itemprop="name"]').content;
+       let title = document.querySelector('meta[itemprop="name"]').content;
        if (title.split(".").pop() !== "pdf") {
          title = title + ".pdf";
        }
