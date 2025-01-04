@@ -82,7 +82,7 @@ Here you can use this script to download view only pdf file from Google Drive. T
            }
          }
    
-         const percentages = Math.floor(((i + 1) / validImgs.length) * 100);
+         const percentages = Math.round(((i + 1) / validImgs.length) * 100);
          console.log(`Processing content ${percentages}%`);
        }
    
