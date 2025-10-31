@@ -1,5 +1,4 @@
-# Google-Drive-View-Only-PDF-Script-Downloader
-
+```markdown
 Here you can use this script to download view only pdf file from Google Drive. This script works like a screenshot capturing all pdf pages to bulk of images with better resolution quality and combine it all into one pdf file.
 
 ### Big-Note: Use this script wisely!
@@ -87,8 +86,11 @@ Here you can use this script to download view only pdf file from Google Drive. T
        }
    
        // check if title contains .pdf in end of the title
-       let title = document.querySelector('meta[itemprop="name"]').content;
-       if (title.split(".").pop() !== "pdf") {
+       // Use optional chaining to avoid errors if the meta tag isn't present.
+       // Fall back to document.title when necessary. Note: if the PDF is inside a cross-origin iframe,
+       // parent scripts cannot access the iframe document due to same-origin policy.
+       let title = document.querySelector('meta[itemprop="name"]')?.content || document.title || 'download.pdf';
+       if ((title.split(".").pop() || "").toLowerCase() !== "pdf") {
          title = title + ".pdf";
        }
    
@@ -126,3 +128,4 @@ Here you can use this script to download view only pdf file from Google Drive. T
 This script is modified with source from :
 - [mhsohan/How-to-download-protected-view-only-files-from-google-drive-](https://github.com/mhsohan/How-to-download-protected-view-only-files-from-google-drive-)
 - [zeltox/Google-Drive-PDF-Downloader](https://github.com/zeltox/Google-Drive-PDF-Downloader)
+```
