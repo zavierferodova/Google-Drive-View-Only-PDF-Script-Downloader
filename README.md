@@ -23,28 +23,27 @@ Here you can use this script to download view only pdf file from Google Drive. T
        let pdf = null;
        let imgElements = document.getElementsByTagName("img");
        let validImgs = [];
-       let initPDF = true;
    
        console.log("Scanning content ...");
        for (let i = 0; i < imgElements.length; i++) {
          let img = imgElements[i];
    
+         // specific check for Google Drive blob images
          let checkURLString = "blob:https://drive.google.com/";
          if (img.src.substring(0, checkURLString.length) !== checkURLString) {
            continue;
          }
-   
-         //   if (!/^blob:/.test(img.src)) {
-         //     continue;
-         //   }
    
          validImgs.push(img);
        }
    
        console.log(`${validImgs.length} content found!`);
        console.log("Generating PDF file ...");
+   
        for (let i = 0; i < validImgs.length; i++) {
          let img = validImgs[i];
+         
+         // Convert image to DataURL via Canvas
          let canvasElement = document.createElement("canvas");
          let con = canvasElement.getContext("2d");
          canvasElement.width = img.naturalWidth;
@@ -52,41 +51,31 @@ Here you can use this script to download view only pdf file from Google Drive. T
          con.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
          let imgData = canvasElement.toDataURL();
    
-         let orientation;
-         if (img.naturalWidth > img.naturalHeight) {
-           //console.log("Landscape");
-           orientation = "l";
-           //ratio = img.naturalWidth/img.naturalHeight
-         } else {
-           //console.log("Portrait");
-           orientation = "p";
-           //ratio = img.naturalWidth/img.naturalHeight
-         }
-   
+         // Determine orientation and dimensions for THIS specific image
+         let orientation = img.naturalWidth > img.naturalHeight ? "l" : "p";
          let pageWidth = img.naturalWidth;
          let pageHeight = img.naturalHeight;
    
-         if (initPDF) {
+         if (i === 0) {
+           // Initialize PDF with the dimensions of the FIRST image
            pdf = new jsPDF({
              orientation: orientation,
              unit: "px",
              format: [pageWidth, pageHeight],
            });
-           initPDF = false;
+         } else {
+           // For subsequent images, add a new page with THAT image's specific dimensions
+           pdf.addPage([pageWidth, pageHeight], orientation);
          }
    
-         if (!initPDF) {
-           pdf.addImage(imgData, "PNG", 0, 0, pageWidth, pageHeight, "", "SLOW");
-           if (i !== validImgs.length - 1) {
-             pdf.addPage();
-           }
-         }
+         // Add the image to the current page
+         pdf.addImage(imgData, "PNG", 0, 0, pageWidth, pageHeight, "", "SLOW");
    
          const percentages = Math.floor(((i + 1) / validImgs.length) * 100);
          console.log(`Processing content ${percentages}%`);
        }
    
-       // check if title contains .pdf in end of the title
+       // Check if title contains .pdf in end of the title
        // Use optional chaining to avoid errors if the meta tag isn't present.
        // Fall back to document.title when necessary. Note: if the PDF is inside a cross-origin iframe,
        // parent scripts cannot access the iframe document due to same-origin policy.
